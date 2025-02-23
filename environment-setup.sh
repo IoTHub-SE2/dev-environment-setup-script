@@ -1,9 +1,6 @@
 #!/bin/bash
 
 # Script must run with sudo permissions.
-#
-# Project template will be created in the current directory of the
-# terminal invoking this script.
 ######################################################################
 
 # get updated package lists
@@ -20,7 +17,7 @@ apt-get install ./vscode.deb
 
 # verify vs code was successfully installed to the system
 vs_code_version=$(code --version)
-if [[ $vs_code_version == *"not found"* ]]; then
+if [[ $vs_code_version == ".*not found*" ]]; then
   echo "Visual Studio Code install failed"
   exit 1
 fi
@@ -30,25 +27,14 @@ apt-get install dotnet-sdk-8.0
 
 # use Visual Studio Code's provided commands to install
 # requisite extensions
-code --install-extension ms-dotnettools.csdevkit github.vscode-github-actions 
+# DEV NOTE: There are several addons for NuGet, find optimal one to include here
+code --install-extension ms-dotnettools.csdevkit github.vscode-github-actions  
 
-# create the project directory structure
-mkdir ProjectRoot
-cd ProjectRoot
-mkdir ConsoleAppProj AppTestProj
-cd ConsoleAppProj
-# create console app from .NET template (.NET v8.0, no top-level statements)
-dotnet new console -f net8.0 --use-program-main
+# Install MongoDB Server Community Edition
 
-# create separate project for unit testing
-cd ../AppTestProj
-dotnet new mstest -f net8.0 
+# Install MongoDB Compass
 
-# add reference of Console App to Test Project in .csproj of the latter
-dotnet add AppTestProj.csproj reference ../ConsoleAppProj/ConsoleAppProj.csproj
+# Install requisite NuGet packages for working with MongoDB in VS Code
 
-# build project to create .sln file and verify correct project structure 
-#cd ..
-dotnet build
 
 exit 0
