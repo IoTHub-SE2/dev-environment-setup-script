@@ -31,10 +31,14 @@ apt-get install dotnet-sdk-8.0
 code --install-extension ms-dotnettools.csdevkit github.vscode-github-actions  
 
 # Install MongoDB Server Community Edition
+wget "https://repo.mongodb.org/apt/ubuntu/dists/noble/mongodb-org/8.0/multiverse/binary-amd64/mongodb-org-server_8.0.5_amd64.deb"
+apt-get install ./mongodb-org-server_8.0.5_amd64.deb
 
 # Install MongoDB Compass
+wget "https://downloads.mongodb.com/compass/mongodb-compass_1.45.3_amd64.deb"
+apt-get install ./mongodb-compass_1.45.3_amd64.deb
 
 # Install requisite NuGet packages for working with MongoDB in VS Code
-
+# DEV NOTE: Using NuGet Gallery addon for VS Code, minimum .NET 8.2 to access NuGet commands
 
 exit 0
